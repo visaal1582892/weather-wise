@@ -1,9 +1,9 @@
 // Importing Weather Icons Object from another file
 import { weatherIconsCommonURL, weatherIcons } from './iconData.js'
 
-// Function For Handling Switching Of forecast data cards
-function switchForecastView(option){
-    let current=1;
+var current=1;
+
+// Functions For Handling Switching Of forecast data cards
     function right(){
         let currentDay=document.getElementById(`id${current}`);
     currentDay.classList.remove('flex');
@@ -40,21 +40,6 @@ function switchForecastView(option){
     newDay.classList.remove('hidden');
     newDay.classList.add('flex');
     }
-    switch(option){
-        case "left":
-            left();
-            break;
-        case "right":
-            right();
-            break;
-        case "rightEnd":
-            rightEnd();
-            break;
-        case "leftEnd":
-            leftEnd();
-            break;    
-    }
-}
 
 // Function Used To Display All the data in a good FormData.
 function display(currWeatherData, forecastData){
@@ -111,10 +96,10 @@ function display(currWeatherData, forecastData){
     const leftArrowButton=document.getElementById("leftArrowButton");
     const rightArrowButton=document.getElementById("rightArrowButton");
     const rightEndArrowButton=document.getElementById("rightEndArrowButton");
-    leftEndArrowButton.addEventListener('click', ()=>switchForecastView("leftEnd"));
-    leftArrowButton.addEventListener('click', ()=>switchForecastView("left"));
-    rightArrowButton.addEventListener('click', ()=>switchForecastView("right"));
-    rightEndArrowButton.addEventListener('click', ()=>switchForecastView("rightEnd"));
+    leftEndArrowButton.addEventListener('click', leftEnd);
+    leftArrowButton.addEventListener('click', left);
+    rightArrowButton.addEventListener('click', right);
+    rightEndArrowButton.addEventListener('click', rightEnd);
 }
 
 // Function To Fetch The Data Using CityName

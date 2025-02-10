@@ -1,1 +1,71 @@
 @import "tailwindcss";
+
+@theme{
+    --font-poppins: Poppins, sans-serif;
+    --animate-typinghead: typehead 1.5s ease-in-out forwards, cursorright 1s step-start 2s forwards;
+    --animate-typingquote: typequote 1.5s ease-in-out forwards, cursorleft 1s step-start 2s forwards;
+    --animate-flipping: flip 3s linear alternate infinite;
+    --animate-smoothingup: smoothup 1.5s ease-in-out forwards;
+}
+
+@keyframes typehead{
+    from{
+        width: 0;
+    }
+    to{
+        width: 12.5ch;
+    }
+}
+
+@keyframes typequote{
+    from{
+        width: 0;
+    }
+    to{
+        width: 26ch;
+    }
+}
+
+@keyframes cursorright{
+    0%, 100%{
+        border-right-color: transparent;
+    }
+    50%{
+        border-right-color: #F97316;
+    }
+}
+
+@keyframes cursorleft{
+    0%, 100%{
+        border-left-color: transparent;
+    }
+    50%{
+        border-left-color: #F97316;
+    }
+}
+
+@keyframes flip{
+    from{
+        transform: rotateY(0deg);
+    }
+    to{
+        transform: rotateY(360deg);
+    }
+}
+
+@keyframes smoothup{
+    from {
+        transform: translateY(20%);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+@layer components{
+    .lgHome{
+        @apply bg-slate-900 w-[50vw] justify-center h-[100vh];
+    }
+}

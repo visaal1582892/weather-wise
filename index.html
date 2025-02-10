@@ -1,11 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="box-border">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <!-- Author Name -->
+    <meta name="author" content="Datla Rohit Varma">
+
+    <!-- Website Description -->
+    <meta name="description" content="This is a weather forecast web application which provides a basic weather information such as current day weather stats, 5 day weather forecast for different cities or regions. Users can check their city's weather data either by giving access to their current location or by searching the city's name in search bar. Designed to be both mobile responsive and desktop responsive.">
+
+    <!-- Important Keywords -->
+    <meta name="keywords" content="weather, forecast, application, wind, humidity, temperaturte, free">
+
+    <!-- Title -->
+    <title>Weather Wise</title>
+
+    <!-- Faviocon -->
+    <!-- <link rel="shortcut icon" href="" type="image/x-icon"> -->
+
+    <!-- Linking Style Sheet -->
+    <link rel="stylesheet" href="./dist/output.css">
+
+    <!-- Linking Google styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Linking Javascript Files -->
+    <script type="module" src="./src/app.js" defer></script>
 </head>
-<body>
+<body class="flex flex-col">
+    <header class="flex bg-slate-900 w-[100vw] h-[15vh] justify-around items-center lg:hidden">
+        <h1 class="text-4xl text-orange-500 font-poppins font-semibold text-center tracking tracking-wider overflow-hidden whitespace-nowrap border-r-4 animate-typinghead">Weather Wise</h1>
+        <blockquote class="hidden md:inline-block text-base text-orange-300 font-bold font-poppins self-end mb-2 italic overflow-hidden whitespace-nowrap animate-typingquote border-l-4 border-l-orange-300">
+            Know the weather, own the day!
+        </blockquote>
+    </header>
+    <main id="main" class="bg-radial from-white from-50% to-orange-200">
+        <section class="w-[100vw] h-[85vh] flex flex-col justify-start items-center p-7">
+            <blockquote class="inline-block md:hidden text-base text-orange-500 mt-4 font-bold font-poppins italic overflow-hidden whitespace-nowrap animate-typingquote border-l-4 border-l-orange-500 text-center">
+                Know the weather, own the day!
+            </blockquote>
+            <section class="h-[55vh] w-[100%] mt-12 flex flex-col justify-around items-center border-2 border-slate-950 border-dashed rounded-xl animate-smoothingup">
+                <div class="h-[38%] w-[90%] flex flex-col justify-between">
+                    <label for="search" class="text-xl font-semibold font-poppins text-orange-500 tracking-wider ">Enter a City Name</label>
+                    <input type="text" name="search" placeholder="Eg: Hyderabad" class="bg-slate-800 text-white placeholder:text-gray-400 rounded-xl outline-none px-3 py-1 text-xl font-poppins tracking-wider focus:border-[3px] focus:border-orange-500 focus:bg-slate-600 font-medium w-[100%] h-[34%]">
     
+                    <!-- Search Button -->
+                    <button id="searchButton" class="bg-orange-500 text-white rounded-xl h-[28%] text-xl font-poppins tracking-wider">Search</button>
+                </div>
+                <div class="w-[90%] flex justify-between items-center">
+                    <hr class="border-1 border-slate-900 w-[40%]">
+                    <label class="text-slate-900 font-bold font-poppins">OR</label>
+                    <hr class="border-1 border-slate w-[40%]">
+                </div>
+                <img src="./public/images/earthIcon.png" alt="earthIcon" class="h-16 w-16 animate-flipping perspective-[1000px]">
+                <button class="bg-orange-500 text-white w-[90%] rounded-xl h-[11%] text-xl font-poppins tracking-wider text-center">
+                    Use Current Location
+                </button>
+            </section>
+        </section>
+        <section id="currWeatherDisplay" class="h-[100vh] hidden flex-col justify-center gap-[4%] items-center">
+            <h2 class="font-poppins text-3xl font-semibold text-orange-500">Weather Today</h2>
+            <article class="h-[70%] w-[87%] rounded-xl border-2 border-dashed p-4 flex flex-wrap justify-between" id="content"></article>
+
+                <!-- Adds Content Dynamically -->
+             
+            </article>
+        </section>
+        <section id="forecastWeatherDisplay" class="h-[100vh] hidden flex-col justify-center gap-[4%] items-center w-[100%]">
+            <h2 class="font-poppins text-3xl font-semibold text-orange-500">5 Day Forecast</h2>
+
+            <!-- Adds Content Dynamically -->
+            
+        </section>
+    </main>
 </body>
 </html>

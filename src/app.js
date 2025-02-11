@@ -163,7 +163,7 @@ function display(currWeatherData, forecastData){
 
 // Function To Fetch The Data Using CityName
 async function fetchWeatherData(cityName){
-    let response=await fetch(`http://api.weatherapi.com/v1/forecast.json?key=3ca8bd6d736c4e72983160301250902&q=${cityName}&days=6&aqi=no&alerts=no`);
+    let response=await fetch(`https://api.weatherapi.com/v1/forecast.json?key=3ca8bd6d736c4e72983160301250902&q=${cityName}&days=6&aqi=no&alerts=no`);
     let add=await true;
     let jsonResponse=await response.json();
     const recentSearches=await JSON.parse(localStorage.getItem('recentSearches'))||[];
@@ -223,7 +223,7 @@ function handleCaptureLocation(){
     async function fetchUsingCoordinates(position){
         try{
             const {latitude, longitude} = await position.coords;
-            const response=await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=bd4bd0edc5d1f3e3ab735b771789a712`)
+            const response=await fetch(`https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=bd4bd0edc5d1f3e3ab735b771789a712`)
             const jsonResponse=await response.json();
             fetchWeatherData(jsonResponse[0].name);
         }

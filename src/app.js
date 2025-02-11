@@ -61,12 +61,13 @@ function display(currWeatherData, forecastData){
                     <p class="font-poppins text-xl font-medium col-span-9 text-slate-800">${currWeatherData[name]} ${(name=="Temp")?"°C":(name=="Wind")?"kph":(name=="Humidity")?"%":""}</p>`).join(``)}
                 </section>`;
     const forecastWeatherDisplay=document.getElementById("forecastWeatherDisplay");
-    const forecastWeatherNames=["Date", "Temp", "Wind", "Humidity", "RainChance", "SnowChance"];
+    const forecastWeatherNames=["City" ,"Date", "Temp", "Wind", "Humidity", "RainChance", "SnowChance"];
     if(forecastWeatherDisplay.classList.contains('hidden')){
         forecastWeatherDisplay.classList.remove('hidden');
         forecastWeatherDisplay.classList.add('flex');
     }
-    forecastWeatherDisplay.innerHTML+=`${forecastData.map((dayData, index)=>`<article class="h-[70%] w-[87%] rounded-xl border-2 border-dashed p-4 ${(index+1==1)?`flex`:`hidden`} flex-wrap justify-between" id=id${index+1}>
+    forecastWeatherDisplay.innerHTML=`<h2 class="font-poppins text-3xl font-semibold text-orange-500">5 Day Forecast</h2>
+    ${forecastData.map((dayData, index)=>`<article class="h-[70%] w-[87%] rounded-xl border-2 border-dashed p-4 ${(index+1==1)?`flex`:`hidden`} flex-wrap justify-between" id=id${index+1}>
                 <figure class="flex flex-nowrap justify-around items-center h-[25%] w-[100%] rounded-2xl bg-slate-700 p-2 shadow-2xl">
                     <h3 class="font-poppins text-2xl font-medium text-orange-500 col-span-6 tracking-wider">${dayData["Description"]}
                     </h3>
@@ -75,20 +76,20 @@ function display(currWeatherData, forecastData){
                 <section class="w-[100%] grid grid-cols-15">
                     ${forecastWeatherNames.map((name) => `<h3 class="font-poppins text-xl font-medium text-orange-500 col-span-7">${name} ${(name=="Date")?`(Day-${index+1})`:``}</h3>
                     <p class="font-poppins text-2xl font-semibold text-orange-500 col-span-1">:</p>
-                    <p class="font-poppins text-xl font-medium col-span-7 text-slate-800">${dayData[name]} ${(name=="Temp")?"°C":(name=="Wind")?"kph":(name=="Humidity")?"%":""}</p>`).join(``)}
+                    <p class="font-poppins text-xl font-medium col-span-7 text-slate-800">${dayData[name]} ${(name=="Temp")?"°C":(name=="Wind")?"kph":(name=="Humidity"||name=="RainChance"||name=="SnowChance")?"%":""}</p>`).join(``)}
                 </section>
             </article>`).join(``)}
             <section id="daysNavigation" class="flex justify-around items-center h-[6%] w-[80%]">
-                <button class="bg-slate-700 rounded-full h-[100%] p-2" id="leftEndArrowButton">
+                <button class="forecastNavigation" id="leftEndArrowButton">
                     <img src="./public/images/leftEndArrowIcon.png" alt="leftEndArrowIcon" class="h-[100%]">
                 </button>
-                <button class="bg-slate-700 rounded-full h-[100%] p-2" id="leftArrowButton">
+                <button class="forecastNavigation" id="leftArrowButton">
                     <img src="./public/images/leftArrowIcon.png" alt="leftArrowIcon" class="h-[100%]">
                 </button>
-                <button class="bg-slate-700 rounded-full h-[100%] p-2" id="rightArrowButton">
+                <button class="forecastNavigation" id="rightArrowButton">
                     <img src="./public/images/rightArrowIcon.png" alt="rightArrowIcon" class="h-[100%]">
                 </button>
-                <button class="bg-slate-700 rounded-full h-[100%] p-2" id="rightEndArrowButton">
+                <button class="forecastNavigation" id="rightEndArrowButton">
                     <img src="./public/images/rightEndArrowIcon.png" alt="rightEndArrowIcon" class="h-[100%]">
                 </button>
             </section>`;
@@ -100,12 +101,33 @@ function display(currWeatherData, forecastData){
     leftArrowButton.addEventListener('click', left);
     rightArrowButton.addEventListener('click', right);
     rightEndArrowButton.addEventListener('click', rightEnd);
+    input.value="";
+    setTimeout(()=>currWeatherDisplay.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'nearest'
+      }), 200);
 }
 
 // Function To Fetch The Data Using CityName
 async function fetchWeatherData(cityName){
     let response=await fetch(`http://api.weatherapi.com/v1/forecast.json?key=3ca8bd6d736c4e72983160301250902&q=${cityName}&days=6&aqi=no&alerts=no`);
+    let add=await true;
     let jsonResponse=await response.json();
+    const recentSearches=await JSON.parse(localStorage.getItem('recentSearches'))||[];
+    for(let i of recentSearches){
+        if(i.toLowerCase()==cityName.toLowerCase()){
+            add=await false;
+            break;
+        }
+    }
+    if(add==true){
+        recentSearches.unshift(cityName);
+    }
+    if(recentSearches.length>5){
+        recentSearches.pop();
+    }
+    localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
     const currWeatherData=await {
         City: jsonResponse.location.name,
         Region: jsonResponse.location.region,
@@ -121,6 +143,7 @@ async function fetchWeatherData(cityName){
     for(let i=1; i<=5; i++){
         const member=await jsonResponse.forecast.forecastday[i];
         await forecastData.push({
+            City: currWeatherData["City"],
             Date: member.date,
             Temp: member.day.avgtemp_c,
             Wind: member.day.maxwind_kph,
@@ -137,9 +160,79 @@ async function fetchWeatherData(cityName){
 // Function To Handle Search
 function handleSearch(event){
     const cityName=event.target.parentNode.querySelector('input').value.trim();
-    console.log(cityName);
     fetchWeatherData(cityName);
 }
 
+// Function To Handle Capture Current Location Button
+function handleCaptureLocation(){
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(fetchUsingCoordinates, showError);
+    }
+    async function fetchUsingCoordinates(position){
+        try{
+            const {latitude, longitude} = await position.coords;
+            const response=await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=bd4bd0edc5d1f3e3ab735b771789a712`)
+            const jsonResponse=await response.json();
+            fetchWeatherData(jsonResponse[0].name);
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+    function showError(error){
+        console.log(error);
+    }
+}
+
+// Function To Fill Input with Suggestion
+function fillInput(event){
+    input.value=event.target.textContent.trim();
+    suggestionBox.classList.add('hidden')
+}
+
+// Function To Show Latest Searches
+function showSuggestions(){
+    const recentSearches=JSON.parse(localStorage.getItem('recentSearches'));
+    if(recentSearches){
+        suggestionBox.innerHTML=`${recentSearches.map((search)=>`<p class="w-[100%] h-10 flex items-center justify-start p-4 text-xl text-white font-poppins opacity-100 border-b-2 border-b-white rounded-xl active:scale-95 hover:bg-slate-900 suggestion">${search}</p>`).join(``)}`;
+        const suggestions=document.querySelectorAll('.suggestion');
+        suggestions.forEach((suggestion)=>suggestion.addEventListener('click', (event)=>fillInput(event)));
+        if(suggestionBox.classList.contains('hidden')){
+            suggestionBox.classList.remove('hidden')
+        }
+    }
+}
+
+// Function to top showing Suggestions
+function unshowSuggestions(){
+    setTimeout(()=>suggestionBox.classList.add('hidden'), 200);
+}
+
+// Functiuon To check If input being entered or not
+function unshowSuggestionsAccordToInput(){
+    if(input.value!=""){
+        suggestionBox.classList.add('hidden');
+    }
+    else{
+        suggestionBox.classList.remove('hidden');
+    }
+}
+
+const inputBlock=document.querySelector('.inputBlock');
+const suggestionBox=document.getElementById("suggestionBox");
+const input=document.querySelector('input');
+input.addEventListener('focus', showSuggestions);
+input.addEventListener('blur', unshowSuggestions);
+input.addEventListener('input', unshowSuggestionsAccordToInput);
 const searchButton=document.getElementById("searchButton");
 searchButton.addEventListener('click', (event)=>handleSearch(event));
+const locationButton=document.getElementById("locationButton");
+locationButton.addEventListener('click', handleCaptureLocation);
+const scrollToForecastButton=document.querySelector('#scrollToForecast').addEventListener('click', ()=>{
+    const forecastWeatherDisplay=document.getElementById('forecastWeatherDisplay');
+    forecastWeatherDisplay.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'nearest'
+      });
+});

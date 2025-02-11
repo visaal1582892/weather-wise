@@ -1,5 +1,5 @@
 // Importing Weather Icons Object from another file
-import { weatherIconsCommonURL, weatherIcons } from '/iconData.js'
+import { weatherIconsCommonURL, weatherIcons } from './iconData'
 
 var current=1;
 

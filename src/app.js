@@ -1,5 +1,5 @@
 // Importing Weather Icons Object from another file
-import { weatherIconsCommonURL, weatherIcons } from './iconData.js'
+import { weatherIconsCommonURL, weatherIcons } from '/iconData.js'
 
 var current=1;
 
@@ -51,14 +51,14 @@ function display(currWeatherData, forecastData){
     }
     currWeatherDisplay.querySelector('article#content').innerHTML=`
                 <figure class="flex flex-nowrap justify-around items-center h-[25%] w-[100%] rounded-2xl bg-slate-700 p-2 shadow-2xl">
-                    <h3 class="font-poppins text-2xl font-medium text-orange-500 col-span-6 tracking-wider">${currWeatherData["Description"]}
+                    <h3 class="font-poppins text-2xl font-medium text-orange-500 col-span-6 tracking-wider lg:text-3xl">${currWeatherData["Description"]}
                     </h3>
                     <img class="col-span-9 w-[50%] h-[80%]" src=${weatherIconsCommonURL}/${weatherIcons[currWeatherData['Code']]} alt="weatherButton">
                 </figure>
                 <section class="w-[100%] grid grid-cols-15">
-                    ${currWeatherNames.map((name) => `<h3 class="font-poppins text-xl font-medium text-orange-500 col-span-5">${name}</h3>
-                    <p class="font-poppins text-2xl font-semibold text-orange-500 col-span-1">:</p>
-                    <p class="font-poppins text-xl font-medium col-span-9 text-slate-800">${currWeatherData[name]} ${(name=="Temp")?"°C":(name=="Wind")?"kph":(name=="Humidity")?"%":""}</p>`).join(``)}
+                    ${currWeatherNames.map((name) => `<h3 class="font-poppins text-xl font-medium text-orange-500 col-span-5 lg:text-2xl lg:text-center">${name}</h3>
+                    <p class="font-poppins text-2xl font-semibold text-orange-500 col-span-1 lg:text-3xl">:</p>
+                    <p class="font-poppins text-xl font-medium col-span-9 text-slate-800 lg:text-2xl lg:text-center">${currWeatherData[name]} ${(name=="Temp")?"°C":(name=="Wind")?"kph":(name=="Humidity")?"%":""}</p>`).join(``)}
                 </section>`;
     const forecastWeatherDisplay=document.getElementById("forecastWeatherDisplay");
     const forecastWeatherNames=["City" ,"Date", "Temp", "Wind", "Humidity", "RainChance", "SnowChance"];
@@ -66,31 +66,31 @@ function display(currWeatherData, forecastData){
         forecastWeatherDisplay.classList.remove('hidden');
         forecastWeatherDisplay.classList.add('flex');
     }
-    forecastWeatherDisplay.innerHTML=`<h2 class="font-poppins text-3xl font-semibold text-orange-500">5 Day Forecast</h2>
+    forecastWeatherDisplay.innerHTML=`<h2 class="font-poppins text-3xl font-semibold text-orange-500 lg:text-4xl">5 Day Forecast</h2>
     ${forecastData.map((dayData, index)=>`<article class="h-[70%] w-[87%] rounded-xl border-2 border-dashed p-4 ${(index+1==1)?`flex`:`hidden`} flex-wrap justify-between" id=id${index+1}>
                 <figure class="flex flex-nowrap justify-around items-center h-[25%] w-[100%] rounded-2xl bg-slate-700 p-2 shadow-2xl">
-                    <h3 class="font-poppins text-2xl font-medium text-orange-500 col-span-6 tracking-wider">${dayData["Description"]}
+                    <h3 class="font-poppins text-2xl font-medium text-orange-500 col-span-6 tracking-wider lg:text-3xl">${dayData["Description"]}
                     </h3>
                     <img class="col-span-9 w-[50%] h-[80%]" src=${weatherIconsCommonURL}/${weatherIcons[dayData['Code']]} alt="weatherButton">
                 </figure>
                 <section class="w-[100%] grid grid-cols-15">
-                    ${forecastWeatherNames.map((name) => `<h3 class="font-poppins text-xl font-medium text-orange-500 col-span-7">${name} ${(name=="Date")?`(Day-${index+1})`:``}</h3>
-                    <p class="font-poppins text-2xl font-semibold text-orange-500 col-span-1">:</p>
-                    <p class="font-poppins text-xl font-medium col-span-7 text-slate-800">${dayData[name]} ${(name=="Temp")?"°C":(name=="Wind")?"kph":(name=="Humidity"||name=="RainChance"||name=="SnowChance")?"%":""}</p>`).join(``)}
+                    ${forecastWeatherNames.map((name) => `<h3 class="font-poppins text-xl font-medium text-orange-500 col-span-7 lg:text-2xl lg:text-center">${name} ${(name=="Date")?`(Day-${index+1})`:``}</h3>
+                    <p class="font-poppins text-2xl font-semibold text-orange-500 col-span-1 lg:text-3xl">:</p>
+                    <p class="font-poppins text-xl font-medium col-span-7 text-slate-800 lg:text-2xl lg:text-center">${dayData[name]} ${(name=="Temp")?"°C":(name=="Wind")?"kph":(name=="Humidity"||name=="RainChance"||name=="SnowChance")?"%":""}</p>`).join(``)}
                 </section>
             </article>`).join(``)}
             <section id="daysNavigation" class="flex justify-around items-center h-[6%] w-[80%]">
                 <button class="forecastNavigation" id="leftEndArrowButton">
-                    <img src="./public/images/leftEndArrowIcon.png" alt="leftEndArrowIcon" class="h-[100%]">
+                    <img src="/public/images/leftEndArrowIcon.png" alt="leftEndArrowIcon" class="h-[100%]">
                 </button>
                 <button class="forecastNavigation" id="leftArrowButton">
-                    <img src="./public/images/leftArrowIcon.png" alt="leftArrowIcon" class="h-[100%]">
+                    <img src="/public/images/leftArrowIcon.png" alt="leftArrowIcon" class="h-[100%]">
                 </button>
                 <button class="forecastNavigation" id="rightArrowButton">
-                    <img src="./public/images/rightArrowIcon.png" alt="rightArrowIcon" class="h-[100%]">
+                    <img src="/public/images/rightArrowIcon.png" alt="rightArrowIcon" class="h-[100%]">
                 </button>
                 <button class="forecastNavigation" id="rightEndArrowButton">
-                    <img src="./public/images/rightEndArrowIcon.png" alt="rightEndArrowIcon" class="h-[100%]">
+                    <img src="/public/images/rightEndArrowIcon.png" alt="rightEndArrowIcon" class="h-[100%]">
                 </button>
             </section>`;
     const leftEndArrowButton=document.getElementById("leftEndArrowButton");
@@ -194,7 +194,7 @@ function fillInput(event){
 function showSuggestions(){
     const recentSearches=JSON.parse(localStorage.getItem('recentSearches'));
     if(recentSearches){
-        suggestionBox.innerHTML=`${recentSearches.map((search)=>`<p class="w-[100%] h-10 flex items-center justify-start p-4 text-xl text-white font-poppins opacity-100 border-b-2 border-b-white rounded-xl active:scale-95 hover:bg-slate-900 suggestion">${search}</p>`).join(``)}`;
+        suggestionBox.innerHTML=`${recentSearches.map((search)=>`<p class="w-[100%] h-10 md:h-16 flex items-center justify-start p-4 text-xl text-white font-poppins opacity-100 border-b-2 border-b-white rounded-xl active:scale-95 hover:bg-slate-900 suggestion">${search}</p>`).join(``)}`;
         const suggestions=document.querySelectorAll('.suggestion');
         suggestions.forEach((suggestion)=>suggestion.addEventListener('click', (event)=>fillInput(event)));
         if(suggestionBox.classList.contains('hidden')){

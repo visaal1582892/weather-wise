@@ -20,27 +20,27 @@
     <!-- <link rel="shortcut icon" href="" type="image/x-icon"> -->
 
     <!-- Linking Style Sheet -->
-    <link rel="stylesheet" href="./dist/output.css">
+    <link rel="stylesheet" href="/dist/output.css">
 
     <!-- Linking Google styles -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <!-- Linking Javascript Files -->
-    <script type="module" src="./src/app.js" defer></script>
+    <script type="module" src="/src/app.js" defer></script>
 </head>
 <body class="flex flex-col">
-    <header class="flex bg-slate-900 w-[100vw] h-[15vh] justify-around items-center lg:hidden">
-        <h1 class="text-4xl text-orange-500 font-poppins font-semibold text-center tracking tracking-wider overflow-hidden whitespace-nowrap border-r-4 animate-typinghead">Weather Wise</h1>
-        <blockquote class="hidden md:inline-block text-base text-orange-300 font-bold font-poppins self-end mb-2 italic overflow-hidden whitespace-nowrap animate-typingquote border-l-4 border-l-orange-300">
+    <header class="flex bg-slate-900 w-[100vw] h-[15vh] justify-around items-center">
+        <h1 class="text-4xl text-orange-500 font-poppins font-semibold text-center tracking tracking-wider overflow-hidden whitespace-nowrap border-r-4 animate-typinghead lg:text-4xl">Weather Wise</h1>
+        <blockquote class="hidden md:inline-block text-base text-orange-300 font-bold font-poppins self-end mb-2 italic overflow-hidden whitespace-nowrap animate-typingquote border-l-4 border-l-orange-300 lg:text-base">
             Know the weather, own the day!
         </blockquote>
     </header>
 
     <!-- Main Element -->
-    <main id="main" class="bg-radial from-white from-50% to-orange-200">
+    <main id="main" class="bg-radial from-white from-50% to-orange-200 flex flex-wrap justify-center items-center">
 
         <!-- Input Section -->
-        <section class="w-[100vw] h-[85vh] flex flex-col justify-start items-center p-7">
+        <section class="w-[100vw] h-[85vh] lg:w-[70vw] flex flex-col justify-start items-center p-7 md:justify-center">
 
             <!-- Quote -->
             <blockquote class="inline-block md:hidden text-base text-orange-500 mt-4 font-bold font-poppins italic overflow-hidden whitespace-nowrap animate-typingquote border-l-4 border-l-orange-500 text-center">
@@ -48,16 +48,16 @@
             </blockquote>
 
             <!-- Taking City Name As Input -->
-            <section class="h-[55vh] w-[100%] mt-12 flex flex-col justify-around items-center border-2 border-slate-950 border-dashed rounded-xl animate-smoothingup">
+            <section class="h-[55vh] w-[100%] mt-12 flex flex-col justify-around items-center border-2 border-slate-950 border-dashed rounded-xl animate-smoothingup md:h-[70vh]">
 
                 <!-- Input block -->
                 <div class="h-[38%] w-[90%] flex flex-col justify-between">
                     <label for="search" class="text-xl font-semibold font-poppins text-orange-500 tracking-wider">Enter a City Name</label>
                     <section class="w-[100%] h-[34%] relative flex flex-col justify-center items-center inputBlock">
-                        <input type="text" name="search" placeholder="Eg: Hyderabad" class="bg-slate-800 text-white placeholder:text-gray-400 rounded-xl outline-none px-3 py-1 text-xl font-poppins tracking-wider focus:border-[3px] focus:border-orange-500 focus:bg-slate-600 font-medium w-[100%] h-[100%]" autocomplete="off">
+                        <input type="text" name="search" placeholder="Eg: Hyderabad" class="bg-slate-800 text-white placeholder:text-gray-400 rounded-xl outline-none px-3 py-1 text-xl font-poppins tracking-wider focus:border-[3px] focus:border-orange-500 focus:bg-slate-600 font-medium w-[100%] h-[100%] md:text-xl" autocomplete="off">
 
                         <!-- Hidden Suggestions Block -->
-                        <section id="suggestionBox" class="absolute w-[97%] top-[103%] flex-col justify-between items-center bg-slate-700 z-20 rounded-xl opacity-90 flex">
+                        <section id="suggestionBox" class="absolute w-[97%] top-[103%] flex-col justify-between items-center bg-slate-700 z-20 rounded-xl opacity-90 flex md:text-xl">
                             
                             <!-- Suggestions Will be added Dynamically -->
 
@@ -76,7 +76,7 @@
                 </div>
 
                 <!-- Accessing current Location Block -->
-                <img src="./public/images/earthIcon.png" alt="earthIcon" class="h-16 w-16 animate-flipping perspective-[1000px]">
+                <img src="/public/images/earthIcon.png" alt="earthIcon" class="h-16 w-16 animate-flipping perspective-[1000px] md:h-20 md:w-20">
 
                 <!-- Button Used to Use currentr Location For weather forecast -->
                 <button id="locationButton" class="button w-[90%] h-[11%]">
@@ -86,18 +86,18 @@
         </section>
 
         <!-- Used To Display Todays Weather -->
-        <section id="currWeatherDisplay" class="h-[100vh] hidden flex-col justify-center gap-[4%] items-center">
-            <h2 class="font-poppins text-3xl font-semibold text-orange-500">Weather Today</h2>
+        <section id="currWeatherDisplay" class="h-[100vh] hidden flex-col justify-center gap-[4%] items-center w-[100%] lg:w-[70%] xl:w-[60%]">
+            <h2 class="font-poppins text-3xl font-semibold text-orange-500 lg:text-4xl">Weather Today</h2>
             <article class="h-[70%] w-[87%] rounded-xl border-2 border-dashed p-4 flex flex-wrap justify-between" id="content"></article>
 
                 <!-- Adds Content Dynamically -->
              
             </article>
-            <button class="button h-[5%] p-2" id="scrollToForecast">5 Day Forecast</button>
+            <button class="button h-[5%] p-2 lg:h-[7%]" id="scrollToForecast">5 Day Forecast</button>
         </section>
         
         <!-- Used to Display 5-day Forecast -->
-        <section id="forecastWeatherDisplay" class="h-[100vh] hidden flex-col justify-center gap-[4%] items-center w-[100%]">
+        <section id="forecastWeatherDisplay" class="h-[100vh] hidden flex-col justify-center gap-[4%] items-center w-[100%] lg:w-[70%] xl:w-[60%]">
 
             <!-- Adds Content Dynamically -->
             

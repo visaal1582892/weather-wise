@@ -6,6 +6,7 @@
     --animate-typingquote: typequote 1.5s ease-in-out forwards, cursorleft 1s step-start 2s forwards;
     --animate-flipping: flip 3s linear alternate infinite;
     --animate-smoothingup: smoothup 1.5s ease-in-out forwards;
+    --animate-timingout: timeout 5s linear;
 }
 
 @keyframes typehead{
@@ -41,6 +42,15 @@
     }
     50%{
         border-left-color: #F97316;
+    }
+}
+
+@keyframes timeout{
+    from{
+        width: 100%;
+    }
+    to{
+        width: 0%;
     }
 }
 

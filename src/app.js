@@ -55,43 +55,63 @@ const weatherIcons={
 
 var current=1;
 
+// Function To Show Error
+function showError(msg){
+    const error=document.getElementById("error");
+    error.querySelector('p.msg').innerHTML=msg;
+    setTimeout(()=>{
+        error.classList.toggle('hidden');
+    }, 5000);
+    error.classList.toggle('hidden');
+}
+
+// Function To Show Success
+function showSuccess(msg){
+    const success=document.getElementById("success");
+    success.querySelector('p.msg').innerHTML=msg;
+    setTimeout(()=>{
+        success.classList.toggle('hidden');
+    }, 5000);
+    success.classList.toggle('hidden');
+}
+
 // Functions For Handling Switching Of forecast data cards
-    function right(){
-        let currentDay=document.getElementById(`id${current}`);
-    currentDay.classList.remove('flex');
-    currentDay.classList.add('hidden');
-        current=(current<5)?current+1:1;
-        let newDay=document.getElementById(`id${current}`);
-    newDay.classList.remove('hidden');
-    newDay.classList.add('flex');
-    }
-    function left(){
-        let currentDay=document.getElementById(`id${current}`);
-    currentDay.classList.remove('flex');
-    currentDay.classList.add('hidden');
-        current=(current>1)?current-1:5;
-        let newDay=document.getElementById(`id${current}`);
-    newDay.classList.remove('hidden');
-    newDay.classList.add('flex');
-    }
-    function leftEnd(){
-        let currentDay=document.getElementById(`id${current}`);
-    currentDay.classList.remove('flex');
-    currentDay.classList.add('hidden');
-        current=1;
-        let newDay=document.getElementById(`id${current}`);
-    newDay.classList.remove('hidden');
-    newDay.classList.add('flex');
-    }
-    function rightEnd(){
-        let currentDay=document.getElementById(`id${current}`);
-    currentDay.classList.remove('flex');
-    currentDay.classList.add('hidden');
-        current=5;
-        let newDay=document.getElementById(`id${current}`);
-    newDay.classList.remove('hidden');
-    newDay.classList.add('flex');
-    }
+function right(){
+    let currentDay=document.getElementById(`id${current}`);
+currentDay.classList.remove('flex');
+currentDay.classList.add('hidden');
+    current=(current<5)?current+1:1;
+    let newDay=document.getElementById(`id${current}`);
+newDay.classList.remove('hidden');
+newDay.classList.add('flex');
+}
+function left(){
+    let currentDay=document.getElementById(`id${current}`);
+currentDay.classList.remove('flex');
+currentDay.classList.add('hidden');
+    current=(current>1)?current-1:5;
+    let newDay=document.getElementById(`id${current}`);
+newDay.classList.remove('hidden');
+newDay.classList.add('flex');
+}
+function leftEnd(){
+    let currentDay=document.getElementById(`id${current}`);
+currentDay.classList.remove('flex');
+currentDay.classList.add('hidden');
+    current=1;
+    let newDay=document.getElementById(`id${current}`);
+newDay.classList.remove('hidden');
+newDay.classList.add('flex');
+}
+function rightEnd(){
+    let currentDay=document.getElementById(`id${current}`);
+currentDay.classList.remove('flex');
+currentDay.classList.add('hidden');
+    current=5;
+    let newDay=document.getElementById(`id${current}`);
+newDay.classList.remove('hidden');
+newDay.classList.add('flex');
+}
 
 // Function Used To Display All the data in a good FormData.
 function display(currWeatherData, forecastData){
@@ -163,7 +183,8 @@ function display(currWeatherData, forecastData){
 
 // Function To Fetch The Data Using CityName
 async function fetchWeatherData(cityName){
-    let response=await fetch(`https://api.weatherapi.com/v1/forecast.json?key=3ca8bd6d736c4e72983160301250902&q=${cityName}&days=6&aqi=no&alerts=no`);
+    try{
+        let response=await fetch(`https://api.weatherapi.com/v1/forecast.json?key=3ca8bd6d736c4e72983160301250902&q=${cityName}&days=6&aqi=no&alerts=no`);
     let add=await true;
     let jsonResponse=await response.json();
     const recentSearches=await JSON.parse(localStorage.getItem('recentSearches'))||[];
@@ -206,19 +227,28 @@ async function fetchWeatherData(cityName){
             SnowChance: member.day.daily_chance_of_snow,
         })
     }
-    await display(currWeatherData, forecastData);
+        await display(currWeatherData, forecastData);
+    }
+    catch(err){
+        showError("Error Occurred: Failed To Fetch Weather Data");
+    }
 }
 
 // Function To Handle Search
 function handleSearch(event){
     const cityName=event.target.parentNode.querySelector('input').value.trim();
-    fetchWeatherData(cityName);
+    if(/^[a-zA-Z\s'-]{2,50}$/.test(cityName)){
+        fetchWeatherData(cityName);
+    }
+    else{
+        showError("Error Occurred : Enter Valid City Name");
+    }
 }
 
 // Function To Handle Capture Current Location Button
 function handleCaptureLocation(){
     if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(fetchUsingCoordinates, showError);
+        navigator.geolocation.getCurrentPosition(fetchUsingCoordinates, throwError);
     }
     async function fetchUsingCoordinates(position){
         try{
@@ -231,8 +261,8 @@ function handleCaptureLocation(){
             console.log(error);
         }
     }
-    function showError(error){
-        console.log(error);
+    function throwError(error){
+        showError("Error Occurred : Permission Denied to access Location or your device do not support location");
     }
 }
 

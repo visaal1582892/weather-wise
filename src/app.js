@@ -54,6 +54,7 @@ const weatherIcons={
 }
 
 var current=1;
+localStorage.clear();
 
 // Function To Show Error
 function showError(msg){

@@ -65,13 +65,10 @@
 }
 
 @layer components{
-    .lgHome{
-        @apply bg-slate-900 w-[50vw] justify-center h-[100vh];
-    }
     .forecastNavigation{
         @apply bg-slate-700 rounded-full h-[100%] p-2 transition-transform hover:scale-105 active:scale-95 cursor-pointer;
     }
     .button{
-        @apply bg-orange-500 text-white rounded-xl text-xl font-poppins tracking-wider text-center transition-transform hover:scale-103 active:scale-97 cursor-pointer md:text-lg;
+        @apply bg-orange-500 text-white rounded-lg text-lg font-poppins tracking-wider text-center transition-transform hover:scale-102 active:scale-98 cursor-pointer md:text-base;
     }
 }

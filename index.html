@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="box-border">
+<html lang="en" class="box-border select-none">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +28,11 @@
     <!-- Linking Javascript Files -->
     <script src="/src/app.js" defer></script>
 </head>
+
+<!-- Body Starts from here -->
 <body class="flex flex-wrap lg:overflow-x-hidden">
+
+    <!-- Header Starts From Here -->
     <header class="flex bg-slate-900 w-[100vw] h-[15vh] justify-around items-center ">
         <h1 class="text-4xl lg:3xl text-orange-500 font-poppins font-semibold text-center tracking tracking-wider overflow-hidden whitespace-nowrap border-r-4 animate-typinghead">Weather Wise</h1>
         <blockquote class="hidden md:inline-block text-base text-orange-300 font-bold font-poppins self-end mb-2 italic overflow-hidden whitespace-nowrap animate-typingquote border-l-4 border-l-orange-300 lg:text-sm">
@@ -39,19 +43,17 @@
     <!-- Success Block -->
      <section id="success" class="flex flex-wrap fixed top-[13vh] right-0 rounded-xl w-[95%] z-50 text-white bg-green-600 text-xl font-poppins sm:w-96 group hidden">
         <div class="w-[100%] flex flex-nowrap p-2">
-            <p class="w-[85%] m-1 msg whitespace-break-spaces break-words">Error Occurred Error Occurred Error Occurred</p>
-            <button class="flex font-extrabold md:text-2xl justify-end items-start w-[12%] cursor-pointer text-red-400 mt-1">⨉</button>
+            <p class="w-[90%] m-1 msg whitespace-break-spaces break-words">Error Occurred Error Occurred Error Occurred</p>
         </div>
-        <div class="w-[100%] bg-red-400 h-1.5 rounded-xl animate-timingout timeout"></div>
+        <div class="w-[100%] bg-red-400 h-1.5 rounded-xl animate-timingout timeout group-hover:[animation-play-state:paused]"></div>
      </section>
 
     <!-- Error Block -->
     <section id="error" class="flex flex-wrap fixed top-[13vh] right-0 rounded-xl w-[95%] z-50 text-white bg-red-600 text-xl font-poppins sm:w-96 group hidden">
        <div class="w-[100%] flex flex-nowrap p-2">
-        <p class="w-[85%] m-1 msg break-words">Error Occurred Error Occurred Error Occurred</p>
-        <button class="flex font-extrabold md:text-2xl justify-end items-start w-[12%] cursor-pointer text-green-400 mt-1">⨉</button>
+        <p class="w-[90%] m-1 msg break-words">Error Occurred Error Occurred Error Occurred</p>
        </div>
-       <div class="w-[100%] bg-green-400 h-1.5 rounded-xl animate-timingout timeout"></div>
+       <div class="w-[100%] bg-green-400 h-1.5 rounded-xl animate-timingout timeout group-hover:[animation-play-state:paused]"></div>
     </section>
 
     <!-- Main Element -->

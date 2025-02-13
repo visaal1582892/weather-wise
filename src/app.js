@@ -54,25 +54,68 @@ const weatherIcons={
 }
 
 var current=1;
+showSuccess("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
 // Function To Show Error
 function showError(msg){
+    let startTime;
+    let completedTime;
+    let remainingTime=5000;
+    let timeout;
     const error=document.getElementById("error");
+
+    // Handling Pausing of timeout when hover
+    error.addEventListener('mouseenter', pauseTimeout);
+
+    // Continuing Timer when moouse leave
+    error.addEventListener('mouseleave', resumeTimeout);
     error.querySelector('p.msg').innerHTML=msg;
-    setTimeout(()=>{
-        error.classList.toggle('hidden');
-    }, 5000);
+    function startTimeout(){
+        startTime=Date.now();
+        timeout=setTimeout(()=>{
+            error.classList.toggle('hidden');
+        }, remainingTime);
+    }
+    function pauseTimeout(){
+        clearTimeout(timeout);
+        completedTime=Date.now()-startTime;
+    }
+    function resumeTimeout() {
+        remainingTime -= completedTime;
+        completedTime = 0;
+        startTimeout();
+    }
     error.classList.toggle('hidden');
+    startTimeout();
 }
 
 // Function To Show Success
 function showSuccess(msg){
+    let startTime;
+    let completedTime;
+    let remainingTime=5000;
+    let timeout;
     const success=document.getElementById("success");
+    success.addEventListener('mouseenter', pauseTimeout);
+    success.addEventListener('mouseleave', resumeTimeout);
     success.querySelector('p.msg').innerHTML=msg;
-    setTimeout(()=>{
-        success.classList.toggle('hidden');
-    }, 5000);
+    function startTimeout(){
+        startTime=Date.now();
+        timeout=setTimeout(()=>{
+            success.classList.toggle('hidden');
+        }, remainingTime);
+    }
+    function pauseTimeout(){
+        clearTimeout(timeout);
+        completedTime=Date.now()-startTime;
+    }
+    function resumeTimeout() {
+        remainingTime -= completedTime;
+        completedTime = 0;
+        startTimeout();
+    }
     success.classList.toggle('hidden');
+    startTimeout();
 }
 
 // Functions For Handling Switching Of forecast data cards
@@ -228,6 +271,7 @@ async function fetchWeatherData(cityName){
         })
     }
         await display(currWeatherData, forecastData);
+        showSuccess("Success : Weather data fetched successfully");
     }
     catch(err){
         showError("Error Occurred: Failed To Fetch Weather Data");
@@ -258,7 +302,7 @@ function handleCaptureLocation(){
             fetchWeatherData(jsonResponse[0].name);
         }
         catch(error){
-            console.log(error);
+            showError("Error Occurred : Failed To track your location.")
         }
     }
     function throwError(error){

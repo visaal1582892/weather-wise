@@ -108,9 +108,9 @@ function display(currWeatherData, forecastData){
                     <img class="col-span-9 w-[50%] h-[80%]" src=${weatherIconsCommonURL}/${weatherIcons[currWeatherData['Code']]} alt="weatherButton">
                 </figure>
                 <section class="w-[100%] grid grid-cols-15">
-                    ${currWeatherNames.map((name) => `<h3 class="font-poppins text-xl font-medium text-orange-500 col-span-5 lg:text-2xl lg:text-center">${name}</h3>
-                    <p class="font-poppins text-2xl font-semibold text-orange-500 col-span-1 lg:text-3xl">:</p>
-                    <p class="font-poppins text-xl font-medium col-span-9 text-slate-800 lg:text-2xl lg:text-center">${currWeatherData[name]} ${(name=="Temp")?"°C":(name=="Wind")?"kph":(name=="Humidity")?"%":""}</p>`).join(``)}
+                    ${currWeatherNames.map((name) => `<h3 class="font-poppins text-xl font-medium text-orange-500 col-span-5 lg:text-xl">${name}</h3>
+                    <p class="font-poppins text-2xl font-semibold text-orange-500 col-span-1 lg:text-2xl">:</p>
+                    <p class="font-poppins text-xl font-medium col-span-9 text-slate-800 lg:text-xl lg:text-center">${currWeatherData[name]} ${(name=="Temp")?"°C":(name=="Wind")?"kph":(name=="Humidity")?"%":""}</p>`).join(``)}
                 </section>`;
     const forecastWeatherDisplay=document.getElementById("forecastWeatherDisplay");
     const forecastWeatherNames=["City" ,"Date", "Temp", "Wind", "Humidity", "RainChance", "SnowChance"];
@@ -118,7 +118,7 @@ function display(currWeatherData, forecastData){
         forecastWeatherDisplay.classList.remove('hidden');
         forecastWeatherDisplay.classList.add('flex');
     }
-    forecastWeatherDisplay.innerHTML=`<h2 class="font-poppins text-3xl font-semibold text-orange-500 lg:text-4xl">5 Day Forecast</h2>
+    forecastWeatherDisplay.innerHTML=`<h2 class="font-poppins text-3xl font-semibold text-orange-500 lg:text-2xl">5 Day Forecast</h2>
     ${forecastData.map((dayData, index)=>`<article class="h-[70%] w-[87%] rounded-xl border-2 border-dashed p-4 ${(index+1==1)?`flex`:`hidden`} flex-wrap justify-between" id=id${index+1}>
                 <figure class="flex flex-nowrap justify-around items-center h-[25%] w-[100%] rounded-2xl bg-slate-700 p-2 shadow-2xl">
                     <h3 class="font-poppins text-2xl font-medium text-orange-500 col-span-6 tracking-wider lg:text-3xl">${dayData["Description"]}
@@ -126,12 +126,12 @@ function display(currWeatherData, forecastData){
                     <img class="col-span-9 w-[50%] h-[80%]" src=${weatherIconsCommonURL}/${weatherIcons[dayData['Code']]} alt="weatherButton">
                 </figure>
                 <section class="w-[100%] grid grid-cols-15">
-                    ${forecastWeatherNames.map((name) => `<h3 class="font-poppins text-xl font-medium text-orange-500 col-span-7 lg:text-2xl lg:text-center">${name} ${(name=="Date")?`(Day-${index+1})`:``}</h3>
-                    <p class="font-poppins text-2xl font-semibold text-orange-500 col-span-1 lg:text-3xl">:</p>
-                    <p class="font-poppins text-xl font-medium col-span-7 text-slate-800 lg:text-2xl lg:text-center">${dayData[name]} ${(name=="Temp")?"°C":(name=="Wind")?"kph":(name=="Humidity"||name=="RainChance"||name=="SnowChance")?"%":""}</p>`).join(``)}
+                    ${forecastWeatherNames.map((name) => `<h3 class="font-poppins text-xl font-medium text-orange-500 col-span-7 lg:text-xl">${name} ${(name=="Date")?`(Day-${index+1})`:``}</h3>
+                    <p class="font-poppins text-2xl font-semibold text-orange-500 col-span-1 lg:text-2xl">:</p>
+                    <p class="font-poppins text-xl font-medium col-span-7 text-slate-800 lg:text-xl lg:text-center">${dayData[name]} ${(name=="Temp")?"°C":(name=="Wind")?"kph":(name=="Humidity"||name=="RainChance"||name=="SnowChance")?"%":""}</p>`).join(``)}
                 </section>
             </article>`).join(``)}
-            <section id="daysNavigation" class="flex justify-around items-center h-[6%] w-[80%]">
+            <section id="daysNavigation" class="flex justify-around items-center h-[6%] w-[70%]">
                 <button class="forecastNavigation" id="leftEndArrowButton">
                     <img src="/public/images/leftEndArrowIcon.png" alt="leftEndArrowIcon" class="h-[100%]">
                 </button>

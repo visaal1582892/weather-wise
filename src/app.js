@@ -108,9 +108,9 @@ function display(currWeatherData, forecastData){
                     <img class="col-span-9 w-[50%] h-[80%]" src=${weatherIconsCommonURL}/${weatherIcons[currWeatherData['Code']]} alt="weatherButton">
                 </figure>
                 <section class="w-[100%] grid grid-cols-15">
-                    ${currWeatherNames.map((name) => `<h3 class="font-poppins text-xl font-medium text-orange-500 col-span-5 lg:text-xl">${name}</h3>
-                    <p class="font-poppins text-2xl font-semibold text-orange-500 col-span-1 lg:text-2xl">:</p>
-                    <p class="font-poppins text-xl font-medium col-span-9 text-slate-800 lg:text-xl lg:text-center">${currWeatherData[name]} ${(name=="Temp")?"°C":(name=="Wind")?"kph":(name=="Humidity")?"%":""}</p>`).join(``)}
+                    ${currWeatherNames.map((name) => `<h3 class="font-poppins text-xl font-medium text-orange-500 col-span-5 lg:text-lg">${name}</h3>
+                    <p class="font-poppins text-2xl font-semibold text-orange-500 col-span-1 lg:text-xl">:</p>
+                    <p class="font-poppins text-xl font-medium col-span-9 text-slate-800 lg:text-lg lg:text-center">${currWeatherData[name]} ${(name=="Temp")?"°C":(name=="Wind")?"kph":(name=="Humidity")?"%":""}</p>`).join(``)}
                 </section>`;
     const forecastWeatherDisplay=document.getElementById("forecastWeatherDisplay");
     const forecastWeatherNames=["City" ,"Date", "Temp", "Wind", "Humidity", "RainChance", "SnowChance"];
@@ -126,9 +126,9 @@ function display(currWeatherData, forecastData){
                     <img class="col-span-9 w-[50%] h-[80%]" src=${weatherIconsCommonURL}/${weatherIcons[dayData['Code']]} alt="weatherButton">
                 </figure>
                 <section class="w-[100%] grid grid-cols-15">
-                    ${forecastWeatherNames.map((name) => `<h3 class="font-poppins text-xl font-medium text-orange-500 col-span-7 lg:text-xl">${name} ${(name=="Date")?`(Day-${index+1})`:``}</h3>
-                    <p class="font-poppins text-2xl font-semibold text-orange-500 col-span-1 lg:text-2xl">:</p>
-                    <p class="font-poppins text-xl font-medium col-span-7 text-slate-800 lg:text-xl lg:text-center">${dayData[name]} ${(name=="Temp")?"°C":(name=="Wind")?"kph":(name=="Humidity"||name=="RainChance"||name=="SnowChance")?"%":""}</p>`).join(``)}
+                    ${forecastWeatherNames.map((name) => `<h3 class="font-poppins text-xl font-medium text-orange-500 col-span-7 lg:text-lg">${name} ${(name=="Date")?`(Day-${index+1})`:``}</h3>
+                    <p class="font-poppins text-2xl font-semibold text-orange-500 col-span-1 lg:text-xl">:</p>
+                    <p class="font-poppins text-xl font-medium col-span-7 text-slate-800 lg:text-lg lg:text-center">${dayData[name]} ${(name=="Temp")?"°C":(name=="Wind")?"kph":(name=="Humidity"||name=="RainChance"||name=="SnowChance")?"%":""}</p>`).join(``)}
                 </section>
             </article>`).join(``)}
             <section id="daysNavigation" class="flex justify-around items-center h-[6%] w-[70%]">
@@ -246,7 +246,7 @@ function fillInput(event){
 function showSuggestions(){
     const recentSearches=JSON.parse(localStorage.getItem('recentSearches'));
     if(recentSearches){
-        suggestionBox.innerHTML=`${recentSearches.map((search)=>`<p class="w-[100%] h-10 md:h-16 flex items-center justify-start p-4 text-xl text-white font-poppins opacity-100 border-b-2 border-b-white rounded-xl active:scale-95 hover:bg-slate-900 suggestion">${search}</p>`).join(``)}`;
+        suggestionBox.innerHTML=`${recentSearches.map((search)=>`<p class="w-[100%] h-10 md:h-14 flex items-center justify-start p-4 text-lg text-white font-poppins opacity-100 border-b-2 border-b-white rounded-xl active:scale-95 hover:bg-slate-900 suggestion">${search}</p>`).join(``)}`;
         const suggestions=document.querySelectorAll('.suggestion');
         suggestions.forEach((suggestion)=>suggestion.addEventListener('click', (event)=>fillInput(event)));
         if(suggestionBox.classList.contains('hidden')){

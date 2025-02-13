@@ -39,6 +39,17 @@
     <!-- Main Element -->
     <main id="main" class="bg-radial from-white from-50% to-orange-200 flex flex-wrap justify-center items-center">
 
+        <!-- Used To Display Todays Weather -->
+        <section id="currWeatherDisplay" class="h-[100vh] hidden flex-col justify-center gap-[4%] items-center w-[100%] lg:w-[32vw] xl:w-[60%]">
+            <h2 class="font-poppins text-3xl font-semibold text-orange-500 lg:text-2xl">Weather Today</h2>
+            <article class="h-[70%] w-[87%] rounded-xl border-2 border-dashed p-4 flex flex-wrap justify-between" id="content"></article>
+
+                <!-- Adds Content Dynamically -->
+             
+            </article>
+            <button class="button h-[5%] p-2 lg:h-[7%]" id="scrollToForecast">5 Day Forecast</button>
+        </section>
+
         <!-- Input Section -->
         <section class="w-[100vw] h-[85vh] lg:w-[32vw] flex flex-col justify-start items-center p-7 md:justify-center">
 
@@ -83,17 +94,6 @@
                     Use Current Location
                 </button>
             </section>
-        </section>
-
-        <!-- Used To Display Todays Weather -->
-        <section id="currWeatherDisplay" class="h-[100vh] hidden flex-col justify-center gap-[4%] items-center w-[100%] lg:w-[32vw] xl:w-[60%]">
-            <h2 class="font-poppins text-3xl font-semibold text-orange-500 lg:text-4xl">Weather Today</h2>
-            <article class="h-[70%] w-[87%] rounded-xl border-2 border-dashed p-4 flex flex-wrap justify-between" id="content"></article>
-
-                <!-- Adds Content Dynamically -->
-             
-            </article>
-            <button class="button h-[5%] p-2 lg:h-[7%]" id="scrollToForecast">5 Day Forecast</button>
         </section>
         
         <!-- Used to Display 5-day Forecast -->

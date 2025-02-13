@@ -103,7 +103,7 @@ function display(currWeatherData, forecastData){
     }
     currWeatherDisplay.querySelector('article#content').innerHTML=`
                 <figure class="flex flex-nowrap justify-around items-center h-[25%] w-[100%] rounded-2xl bg-slate-700 p-2 shadow-2xl">
-                    <h3 class="font-poppins text-2xl font-medium text-orange-500 col-span-6 tracking-wider lg:text-3xl">${currWeatherData["Description"]}
+                    <h3 class="font-poppins text-xl font-medium text-orange-500 col-span-6 tracking-wider">${currWeatherData["Description"]}
                     </h3>
                     <img class="col-span-9 w-[50%] h-[80%]" src=${weatherIconsCommonURL}/${weatherIcons[currWeatherData['Code']]} alt="weatherButton">
                 </figure>
@@ -121,7 +121,7 @@ function display(currWeatherData, forecastData){
     forecastWeatherDisplay.innerHTML=`<h2 class="font-poppins text-3xl font-semibold text-orange-500 lg:text-2xl">5 Day Forecast</h2>
     ${forecastData.map((dayData, index)=>`<article class="h-[70%] w-[87%] rounded-xl border-2 border-dashed p-4 ${(index+1==1)?`flex`:`hidden`} flex-wrap justify-between" id=id${index+1}>
                 <figure class="flex flex-nowrap justify-around items-center h-[25%] w-[100%] rounded-2xl bg-slate-700 p-2 shadow-2xl">
-                    <h3 class="font-poppins text-2xl font-medium text-orange-500 col-span-6 tracking-wider lg:text-3xl">${dayData["Description"]}
+                    <h3 class="font-poppins text-xl font-medium text-orange-500 col-span-6 tracking-wider">${dayData["Description"]}
                     </h3>
                     <img class="col-span-9 w-[50%] h-[80%]" src=${weatherIconsCommonURL}/${weatherIcons[dayData['Code']]} alt="weatherButton">
                 </figure>

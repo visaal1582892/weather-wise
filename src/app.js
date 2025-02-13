@@ -54,7 +54,6 @@ const weatherIcons={
 }
 
 var current=1;
-showSuccess("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
 // Function To Show Error
 function showError(msg){

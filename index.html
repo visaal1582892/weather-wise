@@ -28,7 +28,7 @@
     <!-- Linking Javascript Files -->
     <script src="/src/app.js" defer></script>
 </head>
-<body class="flex flex-col lg:overflow-x-hidden">
+<body class="flex flex-wrap lg:overflow-x-hidden">
     <header class="flex bg-slate-900 w-[100vw] h-[15vh] justify-around items-center overflow-hidden">
         <h1 class="text-4xl text-orange-500 font-poppins font-semibold text-center tracking tracking-wider overflow-hidden whitespace-nowrap border-r-4 animate-typinghead">Weather Wise</h1>
         <blockquote class="hidden md:inline-block text-base text-orange-300 font-bold font-poppins self-end mb-2 italic overflow-hidden whitespace-nowrap animate-typingquote border-l-4 border-l-orange-300 lg:text-base">
@@ -37,10 +37,10 @@
     </header>
 
     <!-- Main Element -->
-    <main id="main" class="bg-radial from-white from-50% to-orange-200 flex flex-wrap justify-center items-center lg:h-[100vh]  lg:overflow-x-hidden">
+    <main id="main" class="bg-radial from-white from-50% to-orange-200 flex flex-wrap justify-center items-center lg:h-[85vh] w-[100vw] overflow-x-hidden">
 
         <!-- Used To Display Todays Weather -->
-        <section id="currWeatherDisplay" class="h-[75vh] hidden flex-col justify-center gap-[4%] items-center w-[100%] lg:w-[30vw]">
+        <section id="currWeatherDisplay" class="h-[82vh] hidden flex-col justify-center gap-[4%] items-center w-[100%] lg:w-[30vw]">
             <h2 class="font-poppins text-3xl font-semibold text-orange-500 lg:text-2xl">Weather Today</h2>
             <article class="h-[70%] w-[87%] rounded-xl border-2 border-dashed p-4 flex flex-wrap justify-between" id="content"></article>
 
@@ -51,7 +51,7 @@
         </section>
 
         <!-- Input Section -->
-        <section class="w-[100vw] h-[75vh] lg:w-[30vw] flex flex-col justify-start items-center p-7 md:justify-center">
+        <section class="w-[100vw] h-[75vh] lg:w-[30vw] flex flex-col justify-start items-center p-7 md:justify-center lg:p-2">
 
             <!-- Quote -->
             <blockquote class="inline-block md:hidden text-base text-orange-500 mt-4 font-bold font-poppins italic overflow-hidden whitespace-nowrap animate-typingquote border-l-4 border-l-orange-500 text-center">
@@ -97,7 +97,7 @@
         </section>
         
         <!-- Used to Display 5-day Forecast -->
-        <section id="forecastWeatherDisplay" class="h-[75vh] hidden flex-col justify-center gap-[4%] items-center w-[100%] lg:w-[30vw] ">
+        <section id="forecastWeatherDisplay" class="h-[82vh] hidden flex-col justify-center gap-[4%] items-center w-[100%] lg:w-[30vw] ">
 
             <!-- Adds Content Dynamically -->
             

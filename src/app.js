@@ -226,7 +226,7 @@ function display(currWeatherData, forecastData){
 // Function To Fetch The Data Using CityName
 async function fetchWeatherData(cityName){
     try{
-        let response=await fetch(`https://api.weatherapi.com/v1/forecast.json?key=3ca8bd6d736c4e72983160301250902&q=${cityName}&days=6&aqi=no&alerts=no`);
+        let response=await fetch(`https://api.weatherapi.com/v1/forecast.json?key=3ca8bd6d736c4e72983160301250902&q=${cityName}&days=3&aqi=no&alerts=no`);
     let add=await true;
     let jsonResponse=await response.json();
     const recentSearches=await JSON.parse(localStorage.getItem('recentSearches'))||[];

@@ -122,7 +122,7 @@ function right(){
     let currentDay=document.getElementById(`id${current}`);
 currentDay.classList.remove('flex');
 currentDay.classList.add('hidden');
-    current=(current<5)?current+1:1;
+    current=(current<2)?current+1:1;
     let newDay=document.getElementById(`id${current}`);
 newDay.classList.remove('hidden');
 newDay.classList.add('flex');
@@ -149,7 +149,7 @@ function rightEnd(){
     let currentDay=document.getElementById(`id${current}`);
 currentDay.classList.remove('flex');
 currentDay.classList.add('hidden');
-    current=5;
+    current=2;
     let newDay=document.getElementById(`id${current}`);
 newDay.classList.remove('hidden');
 newDay.classList.add('flex');
@@ -180,7 +180,7 @@ function display(currWeatherData, forecastData){
         forecastWeatherDisplay.classList.remove('hidden');
         forecastWeatherDisplay.classList.add('flex');
     }
-    forecastWeatherDisplay.innerHTML=`<h2 class="font-poppins text-3xl font-semibold text-orange-500 lg:text-2xl">5 Day Forecast</h2>
+    forecastWeatherDisplay.innerHTML=`<h2 class="font-poppins text-3xl font-semibold text-orange-500 lg:text-2xl">2 Day Forecast</h2>
     ${forecastData.map((dayData, index)=>`<article class="h-[70%] w-[87%] rounded-xl border-2 border-dashed p-4 ${(index+1==1)?`flex`:`hidden`} flex-wrap justify-between" id=id${index+1}>
                 <figure class="flex flex-nowrap justify-around items-center h-[25%] w-[100%] rounded-2xl bg-slate-700 p-2 shadow-2xl">
                     <h3 class="font-poppins text-xl font-medium text-orange-500 col-span-6 tracking-wider">${dayData["Description"]}
@@ -255,7 +255,7 @@ async function fetchWeatherData(cityName){
         Code: jsonResponse.current.condition.code,
     };
     const forecastData=await [];
-    for(let i=1; i<=5; i++){
+    for(let i=1; i<=2; i++){
         const member=await jsonResponse.forecast.forecastday[i];
         await forecastData.push({
             City: currWeatherData["City"],
@@ -273,6 +273,7 @@ async function fetchWeatherData(cityName){
         showSuccess("Success : Weather data fetched successfully");
     }
     catch(err){
+        console.log(err);
         showError("Error Occurred: Failed To Fetch Weather Data");
     }
 }
